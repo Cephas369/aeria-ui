@@ -26,7 +26,7 @@ const update = (value: any) => {
   if( props.booleanRef ) {
     modelValue.value = value
   }
-
+  console.log(value)
   emit('update:modelValue', value?._id || value)
   emit('change', value?._id || value)
 }
@@ -92,6 +92,7 @@ if( !!props.multiple ) {
       size: multiple,
       value: modelValue,
     }"
+
     ref="select"
 
     :class="{

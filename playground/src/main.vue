@@ -13,7 +13,6 @@ watch(() => animalStore.specie, (value, oldValue) => {
 
 
 const selected = ref({ number: 2 })
-
 const options = reactive([{ number: 1 }, { number: 2 }, { number: 3 }, { number: 4 }])
 </script>
 
@@ -74,6 +73,9 @@ const options = reactive([{ number: 1 }, { number: 2 }, { number: 3 }, { number:
       >
     </aeria-form>
 
+
+
+    <pre>Select model value: {{ selected }}</pre>
     <aeria-select 
     v-model="selected"
     :key="selected.number"
