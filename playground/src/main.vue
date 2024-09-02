@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { useStore } from 'aeria-ui'
-import {watch, reactive} from 'vue'
+import { useStore, AeriaSelect } from 'aeria-ui'
+import { ref, watch, reactive } from 'vue'
 
 const state = reactive({
-  date: new Date(),
   ceps: []
 })
 
@@ -11,6 +10,11 @@ const animalStore = useStore('animal')
 watch(() => animalStore.specie, (value, oldValue) => {
   console.log('modelValue:', value)
 })
+
+
+const selected = ref({ number: 2 })
+
+const options = reactive([{ number: 1 }, { number: 2 }, { number: 3 }, { number: 4 }])
 </script>
 
 <template>
@@ -53,28 +57,31 @@ watch(() => animalStore.specie, (value, oldValue) => {
       </aeria-input>
     </div>
 
-    <pre>{{ state }}</pre>
     <aeria-form
         v-model="state"
         :property="{
           type: 'object',
           properties: {
-            date: {
-              type: 'string',
-              format: 'date-time',
-            },
-            ceps: {
-              type: 'array',
-              items: {
-                type: 'string',
-                mask: '##-#'
-              }
+          ceps: {
+            type: 'array',
+            items: {
+            type: 'string',
+            mask: '##-#'
             }
+          }
           }
         }"
       >
     </aeria-form>
-    <aeria-button @click="state.date = new Date">Update date</aeria-button>
+
+    <aeria-select 
+    v-model="selected"
+    :key="selected.number"
+    >
+      <option v-for="option in options" :key="option.number" :value="option">
+        {{ option.number }}
+      </option>
+    </aeria-select>
   </main>
 </template>
 
