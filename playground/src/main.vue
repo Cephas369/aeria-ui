@@ -11,6 +11,11 @@ const animalStore = useStore('animal')
 watch(() => animalStore.specie, (value, oldValue) => {
   console.log('modelValue:', value)
 })
+
+const checkboxes = reactive({
+  item1: false,
+  item2: false
+})
 </script>
 
 <template>
@@ -75,6 +80,21 @@ watch(() => animalStore.specie, (value, oldValue) => {
       >
     </aeria-form>
     <aeria-button @click="state.date = new Date">Update date</aeria-button>
+
+    <aeria-checkbox
+    class="tw-mt-10"
+    v-for="[key, value] in Object.entries(checkboxes)"
+    v-model="checkboxes[key]"
+    :property="{
+      type: 'boolean',
+    }"
+    >
+      <pre> {{ checkboxes[key] }} </pre>
+    </aeria-checkbox>
+
+    <pre> {{ checkboxes }} </pre>
+
+    <aeria-button @click.prevent="() => { checkboxes.item1 = !checkboxes.item1; checkboxes.item2 = !checkboxes.item2; }">Inverter</aeria-button>
   </main>
 </template>
 
