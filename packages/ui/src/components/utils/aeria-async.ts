@@ -7,7 +7,7 @@ export const AeriaAsync = defineComponent({
   },
   setup(props) {
     const result = ref<unknown>(props.initialValue)
-    if( props.promise instanceof Promise ) {
+    if( props.promise?.constructor?.name === "AsyncFunction" ) {
       props.promise.then((value) => {
         result.value = value
       })
